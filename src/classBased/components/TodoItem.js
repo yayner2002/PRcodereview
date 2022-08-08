@@ -1,16 +1,19 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import styles from './TodoItem.module.css';
 
 class TodoItem extends Component {
-  state = {
-    editing: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false,
+    };
+  }
 
-  handleEdit = () => {
-    this.setState({
-      editing: true,
-    });
-  };
+  componentWillUnmount() {
+    window.console.log('Cleaning up....');
+  }
 
   handleUpdatedDone = (event) => {
     if (event.key === 'Enter') {
@@ -20,9 +23,11 @@ class TodoItem extends Component {
     }
   };
 
-  componentWillUnmount() {
-    console.log('Cleaning up....');
-  }
+  handleEdit = () => {
+    this.setState({
+      editing: true,
+    });
+  };
 
   render() {
     const completedStyle = {
@@ -52,6 +57,7 @@ class TodoItem extends Component {
             }}
           />
           <button
+            type="button"
             onClick={() => {
               this.props.deleteTodoProps(id);
             }}
