@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Route, Routes } from 'react-router-dom';
@@ -9,6 +10,12 @@ import NotMatch from '../pages/NoMatch';
 import Navbar from './Navbar';
 
 const TodoContainer = () => {
+  function getInitialTodos() {
+    // getting stored items
+    const temp = localStorage.getItem('todos');
+    const savedTodos = JSON.parse(temp);
+    return savedTodos || [];
+  }
   const [todos, setTodos] = useState(getInitialTodos());
 
   const handleChange = (id) => {
@@ -53,13 +60,6 @@ const TodoContainer = () => {
     const temp = JSON.stringify(todos);
     localStorage.setItem('todos', temp);
   }, [todos]);
-
-  function getInitialTodos() {
-    // getting stored items
-    const temp = localStorage.getItem('todos');
-    const savedTodos = JSON.parse(temp);
-    return savedTodos || [];
-  }
 
   return (
     <div className="container">

@@ -1,8 +1,11 @@
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
 const InputTodo = (props) => {
+  const { addTodoProps } = props;
   const [inputText, setInputText] = useState({
     title: '',
   });
@@ -17,15 +20,14 @@ const InputTodo = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.title.trim()) {
-      props.addTodoProps(inputText.title);
+      addTodoProps(inputText.title);
       setInputText({
         title: '',
       });
     } else {
-      alert('Please write item');
+      window.alert('Please write item');
     }
   };
-
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <input
@@ -43,7 +45,7 @@ const InputTodo = (props) => {
           className: 'submit-iconn',
         }}
       >
-        <button className="input-submit">
+        <button className="input-submit" type="button">
           <FaPlusCircle />
         </button>
       </IconContext.Provider>
